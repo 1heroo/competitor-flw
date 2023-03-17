@@ -41,7 +41,7 @@ class AppServices:
                         'product_price': price,
                         'rrc': df.rrc[index],
                         'разница': df.rrc[index] - price,
-                        '% разница': round(((df.rrc[index] - price) / df.rrc[index]) * 100, 2),
+                        '% разница': round(((df.rrc[index] - price) / df.rrc[index]) * 100, 1),
                         'Продвавец': child['seller'].get('supplierName'),
                         'link': f'https://www.wildberries.ru/catalog/{child["detail"].get("id")}/detail.aspx'
                     })
