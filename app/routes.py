@@ -28,7 +28,7 @@ async def follow_competitor():
 
     return StreamingResponse(io.BytesIO(output.getvalue()),
                              media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                             headers={'Content-Disposition': f'attachment; filename="characteristics.xlsx"'})
+                             headers={'Content-Disposition': f'attachment; filename="arrested.xlsx"'})
 
 
 @router.post('/import-rrc/')
