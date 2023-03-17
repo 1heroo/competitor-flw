@@ -23,7 +23,7 @@ async def follow_competitor():
 
     output = io.BytesIO()
     writer = pd.ExcelWriter(output, engine='xlsxwriter')
-    df.to_excel(writer)
+    df.to_excel(writer, index=False)
     writer.save()
 
     return StreamingResponse(io.BytesIO(output.getvalue()),

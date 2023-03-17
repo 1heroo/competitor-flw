@@ -27,10 +27,9 @@ class AppServices:
         output_data = []
         for index in df.index:
             child_details = await self.app_utils.get_details_by_nms(nms=df.children[index])
-
+            print(df['product_nm_id'][index])
             for child in child_details:
                 price = child['detail'].get('salePriceU')
-                print(price)
                 if not price:
                     continue
                 else:
@@ -42,9 +41,9 @@ class AppServices:
                         'product_price': price,
                         'rrc': df.rrc[index],
                         'разница': df.rrc[index] - price,
-                        '% разница': ((df.rrc[index] - price) / df.rrc[index]) * 100,
+                        '% разница': round(((df.rrc[index] - price) / df.rrc[index]) * 100, 2),
                         'Продвавец': child['seller'].get('supplierName'),
-                        'link': f'https://www.wildberries.ru/catalog/{child.get("id")}/detail.aspx'
+                        'link': f'https://www.wildberries.ru/catalog/{child["detail"].get("id")}/detail.aspx'
                     })
         return output_data
 
