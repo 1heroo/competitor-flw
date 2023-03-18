@@ -30,10 +30,14 @@ class AppServices:
             print(df['product_nm_id'][index])
             for child in child_details:
                 price = child['detail'].get('salePriceU')
+                extended = child['detail'].get('extended', {})
                 if not price:
                     continue
                 else:
                     price = int(price) / 100
+                    clientSale = extended.get('clientSale', 0)
+                    price = price / (100 - clientSale) * 100
+
                 if price < df.rrc[index]:
                     output_data.append({
                         'parent_nm_id': df.product_nm_id[index],
