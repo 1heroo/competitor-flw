@@ -37,6 +37,28 @@ class AppUtils(BaseUtils):
             rrc=rrc
         )
 
+    @staticmethod
+    def check_stocks(products):
+        output_data = []
+        for the_product in products:
+            qty = 0
+            sizes = the_product['detail'].get('sizes')
+            if not sizes:
+                continue
+
+            for size in sizes:
+                stocks = size.get('stocks')
+                if not stocks:
+                    continue
+
+                for stock in stocks:
+                    qty += stock.get('qty')
+
+            if qty > 0:
+                output_data.append(the_product)
+
+        return output_data
+
     async def get_product_data(self, article):
         obj = dict()
         detail_url = f'https://card.wb.ru/cards/detail?spp=27&regions=80,64,38,4,83,33,68,70,69,30,86,75,40,1,22,66,31,48,110,71&pricemarginCoeff=1.0&reg=1&appType=1&emp=0&locale=ru&lang=ru&curr=rub&couponsGeo=12,3,18,15,21&sppFixGeo=4&dest=-455203&nm={article}'

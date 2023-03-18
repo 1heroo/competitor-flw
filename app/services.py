@@ -27,6 +27,7 @@ class AppServices:
         output_data = []
         for index in df.index:
             child_details = await self.app_utils.get_details_by_nms(nms=df.children[index])
+            child_details = self.app_utils.check_stocks(products=child_details)
             print(df['product_nm_id'][index])
             for child in child_details:
                 price = child['detail'].get('salePriceU')
@@ -36,7 +37,7 @@ class AppServices:
                 else:
                     price = int(price) / 100
                     clientSale = extended.get('clientSale', 0)
-                    price = price / (100 - clientSale) * 100
+                    price = round(price / (100 - clientSale) * 100)
 
                 if price < df.rrc[index]:
                     output_data.append({
