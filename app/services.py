@@ -42,7 +42,8 @@ class AppServices:
                 if price < df.rrc[index]:
                     output_data.append({
                         'parent_nm_id': df.product_nm_id[index],
-                        'nm_id': child.get('id'),
+                        'nm_id': child['detail'].get('id'),
+                        'brand': child['detail'].get('brand'),
                         'product_price': price,
                         'rrc': df.rrc[index],
                         'разница': df.rrc[index] - price,
