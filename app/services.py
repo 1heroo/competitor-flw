@@ -36,8 +36,8 @@ class AppServices:
                     continue
                 else:
                     price = int(price) / 100
-                    clientSale = extended.get('clientSale', 0)
-                    price = round(price / (100 - clientSale) * 100)
+                    # clientSale = extended.get('clientSale', 0)
+                    # price = round(price / (100 - clientSale) * 100)
 
                 if price < df.rrc[index]:
                     output_data.append({
