@@ -61,8 +61,9 @@ class AppUtils(BaseUtils):
 
     async def get_product_data(self, article):
         obj = dict()
-        detail_url = f'https://card.wb.ru/cards/detail?spp=27&regions=80,64,38,4,83,33,68,70,69,30,86,75,40,1,22,66,31,48,110,71&pricemarginCoeff=1.0&reg=1&appType=1&emp=0&locale=ru&lang=ru&curr=rub&couponsGeo=12,3,18,15,21&sppFixGeo=4&dest=-455203&nm={article}'
-        detail = await self.make_get_request(detail_url, headers={})
+        detail_url_with_no_clientSale = f'https://card.wb.ru/cards/detail?spp=27&regions=80,64,38,4,83,33,68,70,69,30,86,75,40,1,22,66,31,48,110,71&pricemarginCoeff=1.0&reg=1&appType=1&emp=0&locale=ru&lang=ru&curr=rub&couponsGeo=12,3,18,15,21&sppFixGeo=4&dest=-455203&nm={article}'
+        detail_url_with_clientSale = f'https://card.wb.ru/cards/detail?spp=22&regions=80,64,38,4,115,83,33,68,70,69,30,86,75,40,1,66,48,110,22,31,71,114,111&pricemarginCoeff=1.0&reg=1&appType=1&emp=0&locale=ru&lang=ru&curr=rub&couponsGeo=12,3,18,15,21&sppFixGeo=4&dest=-1257786&nm={article}'
+        detail = await self.make_get_request(detail_url_with_clientSale, headers={})
 
         if detail:
             detail = detail['data']['products']
